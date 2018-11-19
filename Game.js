@@ -2,143 +2,199 @@ function setup() {
   createCanvas(800,400);
   createSprite(400, 200, 50, 50);
 }
-// Variables
-var score = 0;
-// Create Sprites
-var player = createSprite(200, 300);
-player.setAnimation("alien");
+// For Loading Images
+function preload() {
+  windows = loadAnimation('assets/windows.png');
+  road2 = loadAnimation('assets/road2.png');
+  luigi = loadAnimation('assets/luigi/sprite_0.png');
+  yoshi = loadAnimation('assets/yoshi/sprite_0.png');
+  toad = loadAnimation('assets/toad/sprite_0.png');
+  fluigi = loadAnimation('assets/luigi_down/sprite_0.png');
+  /*
+    Example
+    ghost = loadAnimation('assets/ghost_standing0001.png', 'assets/ghost_standing0007.png');
+    */
+}
+// Create your variables here
+var background2 = createSprite(200, 200);
+background2.setAnimation("windows");
+var road1 = createSprite(200, 200, 300, 1000);
+var road3 = createSprite(250, 1000, 300, 1000);
+road3.visible=false;
 
-var leftWall = createSprite(0, 200, 10, 400);
-var rightWall = createSprite(400, 200, 10, 400);
+var road2 = createSprite(500, -400, 300, 1000);
 
-var platform1 = createSprite(300,0);
-platform1.setAnimation("platform");
-platform1.velocityY = 1.3;
-var platform2 = createSprite(100,-200);
-platform2.setAnimation("platform");
-platform2.velocityY = 1.3;
+road2.setAnimation("road2");
+road2.visible= false;
+road2.scale= 5;
 
-var star = createSprite(randomNumber(50, 350), randomNumber(-60, -30));
-star.setAnimation("star");
-star.velocityY = 2.5;
+var space = 0;
+var Time = 5 ;
+background2.scale=2;
+var luigi = createSprite(50, 200);
+luigi.setAnimation("luigi");
+luigi.scale = .85;
 
-var star2 = createSprite(randomNumber(50, 350), randomNumber(-60, -30));
-star2.setAnimation("star");
-star2.velocityY = 2.5;
+var yoshi = createSprite(200, 200);
+yoshi.setAnimation("yoshi");
+yoshi.scale = .75;
+var toad = createSprite(350, 200);
+toad.setAnimation("toad");
+toad.scale = .5;
+ luigi.visible = false;
+    yoshi.visible = false;
+    toad.visible = false;
+
+// Create your sprites here
 
 function draw() {
-  // draw the background
-  if (score < 30) {
-    background1();
-  }
+  // draw background
+  background("red");
+
+  // update sprites
+
+  drawSprites();
+if (toad.y == 700 && yoshi.y == 700) {
+  Gamestart();
+  road1.visible= true;
+
+}
 else {
-  background2();
+  road1.visible= false;
 }
-showScore();
-text(score, 70, 29);
-  // update the sprites
-loopPlatform1();
-loopPlatform2();
-loopItems();
-loopItems2();
-playerFall();
-controlPlayer();
-playerLands();
-collectItems();
-noOffScreenPlayer();
-drawSprites();
+if (road1.visible=== true) {
+  luigi.visible = true;
+ CtrlPlayer();
+screenmove();
 }
 
-// Functions
-function background1() {
-  background("darkBlue");
-  noStroke();
-  fill("yellow");
-  ellipse(randomNumber(0, 400), randomNumber(0, 400), 3, 3);
-  ellipse(randomNumber(0, 400), randomNumber(0, 400), 3, 3);
-  ellipse(340, 50, 60, 60);
-  fill("darkBlue");
-  ellipse(320, 30, 60, 60);
-}
-function background2() {
-  background("darkBlue");
-  noStroke();
-  fill("red");
-  ellipse(randomNumber(0, 400), randomNumber(0, 400),4, 4);
-  ellipse(randomNumber(0, 400), randomNumber(0, 400), 4, 4);
-  ellipse(340, 50, 60, 60);
-  fill("darkBlue");
-  ellipse(320, 30, 60, 60);
-}
-function showScore() {
-  fill("white");
-  textSize(20);
-  text("Score: ",10, 10, 80, 20);
-}
-function loopPlatform1() {
-  if (platform1.y > 400) {
-    platform1.y = -20;
-  }
-}
-function loopPlatform2() {
-  if (platform2.y > 400) {
-    platform2.y = -20;
-  }
-}
-function loopItems() {
-  if (star.y > 420) {
-    star.x = randomNumber(50, 350);
-    star.y = randomNumber(-60, -30);
-  }
-}
+  if (keyWentDown("space")) {
+    space = space+1;
+  }
+  if (space==0) {
+    Start();
+  }
+  if (space ==1) {
+    background2.visible = true;
+    Fighter();
 
-function loopItems2() {
-  if (star2.y > 420) {
-    star2.x = randomNumber(50, 350);
-    star2.y = randomNumber(-60, -30);
-  }
+  } else {
+    background2.visible= false;
+
+  }
 
 }
 
-function playerFall() {
-  player.velocityY = 1.5;
+// Create your functions here
+function Start() {
+ background("red");
+ textSize(40);
+ fill("white");
+ textFont("comicsans");
+ text("Kool Kart", 100, 200);
+ textSize(20);
+ text("Space to continue", 0, 15);
+}
+function Fighter() {
+  luigi.visible = true;
+    yoshi.visible = true;
+    toad.visible = true;
+
+fill("black");
+textSize(30);
+text("Choose Your Fighter", 50,100 );
+text("press space once you pick", 30, 300);
+  if (mousePressedOver(luigi)) {
+
+    toad.y =700;
+    yoshi.y = 700;
+    textSize(20);
+
+    luigi.x = 200 ;
+    luigi.y = 200;
+  }
+    if (luigi.isTouching(road1) ||luigi.isTouching(road2)|| luigi.isTouching(road3) ){
+    luigi.setCollider("rectangle",0,40, 100,20);
+
+  }
+
+}
+function Gamestart() {
+ fill("black");
+ textSize(20);
+ text(Time, 0, 15);
+
+ if (World.seconds >= 5) {
+   road1.velocityY= 3;
+    road2.velocityY= 3;
+ }
+
+ if (World.seconds == 1) {
+   Time=4;
+ }
+ if (World.seconds ==2) {
+   Time=3;
+ }
+  if (World.seconds == 3) {
+   Time=2;
+ }
+   if (World.seconds == 4) {
+   Time=1;
+ } if (World.seconds >= 5) {
+   Time=0;
+ }
 }
 
-function controlPlayer() {
-  if (keyDown("left")) {
-    player.x = player.x - 4;
-    player.setAnimation("alien_left");
-  }
+  function CtrlPlayer() {
 
-  if (keyDown("right")) {
-    player.x = player.x + 4;
-    player.setAnimation("alien");
-  }
+    if (keyDown("right")) {
+      luigi.velocityX = 3;
 
-  if (keyDown("up")) {
-    player.velocityY = - 3;
-  }
+    }
+    if (keyDown("left")) {
+      luigi.velocityX = -3;
+
+    }
+    if (keyDown("d")) {
+      luigi.rotation= luigi.rotation + 2;
+      luigi.velocityX= luigi.velocityX + .25;
+    } else if (keyDown("a")) {
+      luigi.rotation= luigi.rotation - 2;
+      luigi.velocityX= luigi.velocityX - .25;
+    } else {
+      luigi.velocityY = 0;
+      luigi.rotation = 0;
+    }
+    if (luigi.rotaion >= 180) {
+      luigi.rotation = 0;
+
+    } else if (luigi.rotation <= -180) {
+      luigi.rotation =0;
+    }
+
+  }
+function screenmove() {
+
+if (road1.y >=200) {
+  road2.visible=true;
+
 }
-
-function playerLands() {
-  player.collide(platform1);
-  player.collide(platform2);
+if (luigi.isTouching(road2)) {
+  road2.velocityX = -2;
 }
+  if(road2.x<-70){
+    road2.velocityX=0;
+    road2.velocityY=-3;
 
-function collectItems() {
-  if (player.isTouching(star)) {
-    star.x = randomNumber(50, 350);
-    star.y = randomNumber(-60, -30);
-    score = score + 1;
-  }
-  if (player.isTouching(star2)) {
-    star2.x = randomNumber(50, 350);
-    star2.y = randomNumber(-60, -30);
-    score = score + 1;
-  }
+  }
+else if (road2.y>=300) {
+  road2.velocityX=-3;
+  road2.velocityY=0;
+
 }
+if (road2.velocityY ==-3){
+road3.velocityY=-3;
+luigi.setAnimation("fluigi");
+road3.visible= true;}
 
-function noOffScreenPlayer() {
-  player.collide(leftWall);
-  player.collide(rightWall);
 }
