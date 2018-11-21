@@ -1,4 +1,4 @@
-# Kool Kart
+# Kool Kart😎
 
 A game I made with Eric G.
 
