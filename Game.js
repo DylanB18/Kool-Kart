@@ -1,86 +1,86 @@
+// Start-Up
 function setup() {
-  createCanvas(800,400);
-  createSprite(400, 200, 50, 50);
+  createCanvas(800, 300);
 }
-// For Loading Images
+
+// Loading Images
 function preload() {
   windows = loadAnimation('assets/windows.png');
   road2 = loadAnimation('assets/road2.png');
-  luigi = loadAnimation('assets/luigi/sprite_0.png');
-  yoshi = loadAnimation('assets/yoshi/sprite_0.png');
-  toad = loadAnimation('assets/toad/sprite_0.png');
-  fluigi = loadAnimation('assets/luigi_down/sprite_0.png');
-  /*
-    Example
-    ghost = loadAnimation('assets/ghost_standing0001.png', 'assets/ghost_standing0007.png');
-    */
+  luigi = loadAnimation('assets/luigi/luigi_left.png');
+  yoshi = loadAnimation('assets/yoshi/yoshi_left.png');
+  toad = loadAnimation('assets/toad/toad_left.png');
 }
 // Create your variables here
 var background2 = createSprite(200, 200);
 background2.setAnimation("windows");
+background2.scale=2;
+
+// Roads
 var road1 = createSprite(200, 200, 300, 1000);
-var road3 = createSprite(250, 1000, 300, 1000);
-road3.visible=false;
-
 var road2 = createSprite(500, -400, 300, 1000);
-
+var road3 = createSprite(250, 1000, 300, 1000);
 road2.setAnimation("road2");
 road2.visible= false;
+road3.visible=false;
 road2.scale= 5;
 
 var space = 0;
 var Time = 5 ;
-background2.scale=2;
+
+// Characters
 var luigi = createSprite(50, 200);
 luigi.setAnimation("luigi");
-luigi.scale = .85;
+luigi.visible = false;
+luigi.scale = 0.85;
 
 var yoshi = createSprite(200, 200);
 yoshi.setAnimation("yoshi");
-yoshi.scale = .75;
+yoshi.visible = false;
+yoshi.scale = 0.75;
+
 var toad = createSprite(350, 200);
 toad.setAnimation("toad");
-toad.scale = .5;
- luigi.visible = false;
-    yoshi.visible = false;
-    toad.visible = false;
-
-// Create your sprites here
+toad.visible = false;
+toad.scale = 0.5;
 
 function draw() {
-  // draw background
-  background("red");
+  // Draw Background
+	background("red");
 
-  // update sprites
-
+  // Update Sprites
   drawSprites();
-if (toad.y == 700 && yoshi.y == 700) {
-  Gamestart();
-  road1.visible= true;
 
-}
-else {
-  road1.visible= false;
-}
-if (road1.visible=== true) {
-  luigi.visible = true;
- CtrlPlayer();
-screenmove();
-}
+// Processing
+	if (toad.y == 700 && yoshi.y == 700) {
+    Gamestart();
+    road1.visible= true;
+	}
+
+	else {
+  	road1.visible= false;
+	}
+
+	if (road1.visible=== true) {
+  	luigi.visible = true;
+ 		CtrlPlayer();
+		screenmove();
+	}
 
   if (keyWentDown("space")) {
     space = space+1;
   }
+
   if (space==0) {
     Start();
   }
+
   if (space ==1) {
     background2.visible = true;
-    Fighter();
-
-  } else {
+    PlayersVisable();
+	}
+	else {
     background2.visible= false;
-
   }
 
 }
@@ -90,20 +90,23 @@ function Start() {
  background("red");
  textSize(40);
  fill("white");
+	//Wowwww... Comic Sans... We should have used Papyrus...
  textFont("comicsans");
  text("Kool Kart", 100, 200);
  textSize(20);
- text("Space to continue", 0, 15);
+ text("Press Space to Continue", 0, 15);
 }
-function Fighter() {
+
+function PlayersVisable() {
   luigi.visible = true;
-    yoshi.visible = true;
-    toad.visible = true;
+  yoshi.visible = true;
+  toad.visible = true;
 
 fill("black");
 textSize(30);
 text("Choose Your Fighter", 50,100 );
-text("press space once you pick", 30, 300);
+text("Press Space When Done", 30, 300);
+
   if (mousePressedOver(luigi)) {
 
     toad.y =700;
