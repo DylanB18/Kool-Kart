@@ -5,11 +5,11 @@ function setup() {
 
 // Loading Images
 function preload() {
-  windows = loadAnimation('assets/windows.png');
-  road2 = loadAnimation('assets/road2.png');
-  luigi = loadAnimation('assets/luigi/luigi_left.png');
-  yoshi = loadAnimation('assets/yoshi/yoshi_left.png');
-  toad = loadAnimation('assets/toad/toad_left.png');
+  windows = loadAnimation("assets/windows.png");
+  road2 = loadAnimation("assets/road2.png");
+  luigi = loadAnimation("assets/luigi/luigi_left.png");
+  yoshi = loadAnimation("assets/yoshi/yoshi_left.png");
+  toad = loadAnimation("assets/toad/toad_left.png");
 }
 // Create your variables here
 var background2 = createSprite(200, 200);
