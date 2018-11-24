@@ -197,7 +197,7 @@ else if (road2.y>=300) {
 }
 if (road2.velocityY ==-3){
 road3.velocityY=-3;
-luigi.setAnimation("fluigi");
+// Commented Out For Debug Purposes- 11/23/18: luigi.setAnimation("fluigi");
 road3.visible= true;}
 
 }
