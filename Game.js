@@ -85,7 +85,7 @@ function draw() {
 
 }
 
-// Create your functions here
+// Functions
 function Start() {
  background("red");
  textSize(40);
@@ -108,20 +108,18 @@ text("Choose Your Fighter", 50,100 );
 text("Press Space When Done", 30, 300);
 
   if (mousePressedOver(luigi)) {
-
     toad.y =700;
     yoshi.y = 700;
     textSize(20);
-
     luigi.x = 200 ;
     luigi.y = 200;
   }
-    if (luigi.isTouching(road1) ||luigi.isTouching(road2)|| luigi.isTouching(road3) ){
+
+	if (luigi.isTouching(road1) ||luigi.isTouching(road2)|| luigi.isTouching(road3) ){
     luigi.setCollider("rectangle",0,40, 100,20);
-
   }
-
 }
+
 function Gamestart() {
  fill("black");
  textSize(20);
@@ -135,69 +133,77 @@ function Gamestart() {
  if (World.seconds == 1) {
    Time=4;
  }
+
  if (World.seconds ==2) {
    Time=3;
  }
-  if (World.seconds == 3) {
+ if (World.seconds == 3) {
    Time=2;
  }
-   if (World.seconds == 4) {
+ if (World.seconds == 4) {
    Time=1;
- } if (World.seconds >= 5) {
+	}
+	if (World.seconds >= 5) {
    Time=0;
- }
+ 	}
 }
 
-  function CtrlPlayer() {
-
-    if (keyDown("right")) {
-      luigi.velocityX = 3;
-
+function CtrlPlayer() {
+	if (keyDown("right")) {
+  	luigi.velocityX = 3;
     }
-    if (keyDown("left")) {
+
+ 	if (keyDown("left")) {
       luigi.velocityX = -3;
+  }
 
-    }
-    if (keyDown("d")) {
-      luigi.rotation= luigi.rotation + 2;
-      luigi.velocityX= luigi.velocityX + .25;
-    } else if (keyDown("a")) {
+  if (keyDown("d")) {
+  	luigi.rotation= luigi.rotation + 2;
+    luigi.velocityX= luigi.velocityX + .25;
+  }
+
+	else if (keyDown("a")) {
       luigi.rotation= luigi.rotation - 2;
       luigi.velocityX= luigi.velocityX - .25;
-    } else {
+    }
+
+	else {
       luigi.velocityY = 0;
       luigi.rotation = 0;
     }
-    if (luigi.rotaion >= 180) {
-      luigi.rotation = 0;
 
-    } else if (luigi.rotation <= -180) {
-      luigi.rotation =0;
+  if (luigi.rotaion >= 180) {
+      luigi.rotation = 0;
+	}
+
+	else if (luigi.rotation <= -180) {
+  	luigi.rotation =0;
     }
 
-  }
+}
+
 function screenmove() {
 
-if (road1.y >=200) {
-  road2.visible=true;
+	if (road1.y >=200) {
+  	road2.visible=true;
+	}
 
-}
-if (luigi.isTouching(road2)) {
-  road2.velocityX = -2;
-}
+	if (luigi.isTouching(road2)) {
+  	road2.velocityX = -2;
+	}
   if(road2.x<-70){
     road2.velocityX=0;
     road2.velocityY=-3;
-
   }
 else if (road2.y>=300) {
   road2.velocityX=-3;
   road2.velocityY=0;
+	}
 
-}
-if (road2.velocityY ==-3){
-road3.velocityY=-3;
-// Commented Out For Debug Purposes- 11/23/18: luigi.setAnimation("fluigi");
-road3.visible= true;}
+	if (road2.velocityY ==-3){
+		road3.velocityY=-3;
+		// Commented Out For Debug Purposes- 11/23/18: luigi.setAnimation("fluigi");
+		road3.visible= true;
+	}
 
 }
