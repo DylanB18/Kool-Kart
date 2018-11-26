@@ -1,6 +1,34 @@
+//Test Import
+var script1 = document.createElement('script');
+script1.type = 'text/javascript';
+script1.src = 'lib/p5.min.js';
+document.getElementsByTagName('head')[0].appendChild(script1);
+
+var script2 = document.createElement('script');
+script2.type = 'text/javascript';
+script2.src = 'lib/p5.play.js';
+document.getElementsByTagName('head')[0].appendChild(script2);
+
+var script3= document.createElement('script');
+script3.type = 'text/javascript';
+script3.src = 'lib/p5.dom.js';
+document.getElementsByTagName('head')[0].appendChild(script3);
+
+var script4 = document.createElement('script');
+script4.type = 'text/javascript';
+script4.src = 'lib/p5.sound.js';
+document.getElementsByTagName('head')[0].appendChild(script4);
+
 // Start-Up
 function setup() {
-  createCanvas(800, 300);
+  createCanvas(400, 400);
+	var background2 = createSprite(200, 200);
+	var road1 = createSprite(200, 200, 300, 1000);
+	var road2 = createSprite(500, -400, 300, 1000);
+	var road3 = createSprite(250, 1000, 300, 1000);
+	var luigi = createSprite(50, 200);
+	var yoshi = createSprite(200, 200);
+	var toad = createSprite(350, 200);
 }
 
 // Loading Images
@@ -12,14 +40,10 @@ function preload() {
   toad = loadAnimation("assets/toad/toad_left.png");
 }
 // Create your variables here
-var background2 = createSprite(200, 200);
 background2.setAnimation("windows");
 background2.scale=2;
 
 // Roads
-var road1 = createSprite(200, 200, 300, 1000);
-var road2 = createSprite(500, -400, 300, 1000);
-var road3 = createSprite(250, 1000, 300, 1000);
 road2.setAnimation("road2");
 road2.visible= false;
 road3.visible=false;
@@ -29,17 +53,15 @@ var space = 0;
 var Time = 5 ;
 
 // Characters
-var luigi = createSprite(50, 200);
 luigi.setAnimation("luigi");
 luigi.visible = false;
 luigi.scale = 0.85;
 
-var yoshi = createSprite(200, 200);
+
 yoshi.setAnimation("yoshi");
 yoshi.visible = false;
 yoshi.scale = 0.75;
 
-var toad = createSprite(350, 200);
 toad.setAnimation("toad");
 toad.visible = false;
 toad.scale = 0.5;
